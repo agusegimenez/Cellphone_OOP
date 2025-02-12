@@ -1,1 +1,1 @@
-# ClubManagement_OOP
+Final Project for OOP Subject
