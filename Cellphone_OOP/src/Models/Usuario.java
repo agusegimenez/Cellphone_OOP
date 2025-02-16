@@ -1,7 +1,7 @@
 package Models;
 
 public class Usuario {
-    private Celular celular;
+    private Gestor gestor;
     private String nombreUsuario;
     private int numeroCelular;
 }

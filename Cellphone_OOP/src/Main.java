@@ -1,8 +1,8 @@
-import Models.Celular;
+import Models.Gestor;
 
 public class Main {
     public static void main(String[] args) {
-        Celular celular = Celular.getInstance();
-        celular.agendarContacto();
+        Gestor gestor = Gestor.getInstance();
+        gestor.agendarContacto();
     }
 }

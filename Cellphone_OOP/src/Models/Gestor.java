@@ -5,8 +5,8 @@ import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
-public class Celular {
-    private static Celular instance;
+public class Gestor {
+    private static Gestor instance;
     public List<Llamada> llamadas;
     public List<Reunion> reuniones;
     public List<Contacto> contactos;
@@ -14,16 +14,16 @@ public class Celular {
     public Usuario duenio;
     public Scanner input;
 
-    private Celular(){
+    private Gestor(){
         this.llamadas = new ArrayList<>();
         this.reuniones = new ArrayList<>();
         this.contactos = new ArrayList<>();
         this.gruposAmigos = new ArrayList<>();
     };
 
-    public static Celular getInstance(){
+    public static Gestor getInstance(){
         if(instance==null){
-            instance = new Celular();
+            instance = new Gestor();
         }
         return instance;
     }
