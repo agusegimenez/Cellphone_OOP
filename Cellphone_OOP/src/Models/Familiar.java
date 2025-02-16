@@ -17,4 +17,12 @@ public class Familiar extends Contacto {
         super(nombreContacto, numeroContacto);
         this.tipoRelacion = tipoRelacion;
     }
+
+    @Override
+    public String toString() {
+        return "ID del contacto: " + this.getIdContacto() + "\n" +
+                "Nombre: " + this.getNombreContacto() + "\n" +
+                "Numero: " + this.getNumeroContacto() + "\n" +
+                "Tipo de relacion: " + this.getTipoRelacion();
+    }
 }

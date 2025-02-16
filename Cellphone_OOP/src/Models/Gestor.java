@@ -14,6 +14,7 @@ public class Gestor {
     public Usuario duenio;
     public Scanner input;
 
+    // este constructor inicializa el gestor con listas vacias y es privado para que no se acceda desde fuera de la clase
     private Gestor(){
         this.llamadas = new ArrayList<>();
         this.reuniones = new ArrayList<>();
@@ -21,6 +22,7 @@ public class Gestor {
         this.gruposAmigos = new ArrayList<>();
     };
 
+    //singleton, se hace el llamado a la instancia de Gestor, de no existir, la crea
     public static Gestor getInstance(){
         if(instance==null){
             instance = new Gestor();
@@ -72,7 +74,7 @@ public class Gestor {
 
             GrupoAmigos grupoSeleccionado = null;
 
-            if (!gruposAmigos.isEmpty()) {
+            if (gruposAmigos.size()==0) {
                 System.out.println("¿Desea agregarlo a un grupo existente?");
                 System.out.println("1. Sí");
                 System.out.println("2. No, crear un nuevo grupo");
@@ -99,32 +101,41 @@ public class Gestor {
                 }
 
                 if (opcionGrupo == 1) { // Agregar a un grupo existente
-                    System.out.println("Seleccione un grupo:");
+                    if(gruposAmigos.size()==0){
+                        System.out.println("No tiene grupos agregados. Va a crear uno nuevo.");
+                        System.out.print("Ingrese el nombre del nuevo grupo: ");
+                        String nombreGrupo = input.nextLine();
+                        grupoSeleccionado = new GrupoAmigos(nombreGrupo, new ArrayList<>());
+                        gruposAmigos.add(grupoSeleccionado);
+                    } else{
+                        System.out.println("Seleccione un grupo:");
 
-                    for (int i = 0; i < gruposAmigos.size(); i++) {
-                        System.out.println((i + 1) + ". " + gruposAmigos.get(i).getNombreGrupo());
-                    }
+                        for (int i = 0; i < gruposAmigos.size(); i++) {
+                            System.out.println((i + 1) + ". " + gruposAmigos.get(i).getNombreGrupo());
+                        }
 
-                    int grupoIndex = -1;
-                    boolean grupoValido = false;
+                        int grupoIndex = -1;
+                        boolean grupoValido = false;
 
-                    while (!grupoValido) {
-                        try {
-                            System.out.print("Ingrese el número del grupo: ");
-                            grupoIndex = input.nextInt() - 1;
-                            input.nextLine(); // Consumir el salto de línea
+                        while (!grupoValido) {
+                            try {
+                                System.out.print("Ingrese el número del grupo: ");
+                                grupoIndex = input.nextInt() - 1;
+                                input.nextLine(); // Consumir el salto de línea
 
-                            if (grupoIndex >= 0 && grupoIndex < gruposAmigos.size()) {
-                                grupoSeleccionado = gruposAmigos.get(grupoIndex);
-                                grupoValido = true;
-                            } else {
-                                System.out.println("⚠️ Número de grupo inválido. Intente nuevamente.");
+                                if (grupoIndex >= 0 && grupoIndex < gruposAmigos.size()) {
+                                    grupoSeleccionado = gruposAmigos.get(grupoIndex);
+                                    grupoValido = true;
+                                } else {
+                                    System.out.println("⚠️ Número de grupo inválido. Intente nuevamente.");
+                                }
+                            } catch (InputMismatchException e) {
+                                System.out.println("❌ Entrada inválida. Por favor, ingrese un número válido.");
+                                input.nextLine(); // Limpiar buffer
                             }
-                        } catch (InputMismatchException e) {
-                            System.out.println("❌ Entrada inválida. Por favor, ingrese un número válido.");
-                            input.nextLine(); // Limpiar buffer
                         }
                     }
+
                 } else if (opcionGrupo == 2) { // Crear un nuevo grupo
                     System.out.print("Ingrese el nombre del nuevo grupo: ");
                     String nombreGrupo = input.nextLine();

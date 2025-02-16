@@ -27,4 +27,7 @@ public abstract class Contacto {
         this.nombreContacto = nombreContacto;
         this.numeroContacto = numeroContacto;
     }
+
+    @Override
+    public abstract String toString();
 }
