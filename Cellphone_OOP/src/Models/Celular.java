@@ -58,8 +58,9 @@ public class Celular {
         String nombre = input.nextLine();
         System.out.println("Ingrese el numero del contacto: ");
         int numeroContacto = input.nextInt();
+        input.nextLine();
 
-        Contacto nuevoContacto = null;
+        Contacto nuevoContacto;
 
         if (opcion == 1) { // Crear Familiar
             System.out.print("Ingrese el tipo de relación (Ejemplo: hermano, madre, primo, etc.): ");
