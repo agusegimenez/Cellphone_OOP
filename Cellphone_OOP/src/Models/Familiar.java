@@ -5,4 +5,16 @@ import Models.Contacto;
 public class Familiar extends Contacto {
     private String tipoRelacion;
 
+    public String getTipoRelacion() {
+        return tipoRelacion;
+    }
+
+    public void setTipoRelacion(String tipoRelacion) {
+        this.tipoRelacion = tipoRelacion;
+    }
+
+    public Familiar(String nombreContacto, int numeroContacto, String tipoRelacion) {
+        super(nombreContacto, numeroContacto);
+        this.tipoRelacion = tipoRelacion;
+    }
 }
