@@ -566,7 +566,7 @@
 											"top": 686,
 											"width": 352.50146484375,
 											"height": 13,
-											"text": "+mostrarContactos(): List<Contacto>",
+											"text": "+mostrarContactos(): void",
 											"horizontalAlignment": 0
 										},
 										{
@@ -5504,7 +5504,7 @@
 									"_parent": {
 										"$ref": "AAAAAAGU/FVFgy0yXMo="
 									},
-									"type": "List<Contacto>",
+									"type": "void",
 									"direction": "return"
 								}
 							]

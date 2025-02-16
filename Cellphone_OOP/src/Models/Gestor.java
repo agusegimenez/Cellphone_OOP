@@ -156,5 +156,12 @@ public class Gestor {
         System.out.println("✅ Contacto agregado con éxito: " + nuevoContacto.getNombreContacto() + ", Telefono: " + nuevoContacto.getNumeroContacto());
     }
 
+    public void mostrarContactos(){
+        for(Contacto contacto : contactos){
+            String info = contacto.toString();
+            System.out.println(info);
+            System.out.println("");
+        }
+    }
 
 }
