@@ -1346,7 +1346,7 @@
 											"top": 214,
 											"width": 128.54345703125,
 											"height": 13,
-											"text": "+apodo: String",
+											"text": "-apodo: String",
 											"horizontalAlignment": 0
 										},
 										{
@@ -1364,7 +1364,7 @@
 											"top": 229,
 											"width": 128.54345703125,
 											"height": 13,
-											"text": "+grupo: GrupoAmigos",
+											"text": "-grupo: GrupoAmigos",
 											"horizontalAlignment": 0
 										}
 									],
@@ -5681,6 +5681,7 @@
 								"$ref": "AAAAAAGU/CfNduGG/1w="
 							},
 							"name": "apodo",
+							"visibility": "private",
 							"type": "String"
 						},
 						{
@@ -5690,6 +5691,7 @@
 								"$ref": "AAAAAAGU/CfNduGG/1w="
 							},
 							"name": "grupo",
+							"visibility": "private",
 							"type": {
 								"$ref": "AAAAAAGU/F8kr0BRoMc="
 							}
