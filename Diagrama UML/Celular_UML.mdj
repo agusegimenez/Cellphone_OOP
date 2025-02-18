@@ -141,7 +141,7 @@
 											"top": 790,
 											"width": 255.68701171875,
 											"height": 13,
-											"text": "-celular: Celular",
+											"text": "-celular: Gestor",
 											"horizontalAlignment": 0
 										},
 										{
@@ -232,7 +232,7 @@
 											"top": 871,
 											"width": 255.68701171875,
 											"height": 13,
-											"text": "+getCelular(): Celular",
+											"text": "+getCelular(): Gestor",
 											"horizontalAlignment": 0
 										},
 										{
@@ -436,7 +436,7 @@
 											"top": 535,
 											"width": 352.50146484375,
 											"height": 13,
-											"text": "Celular"
+											"text": "Gestor"
 										},
 										{
 											"_type": "LabelView",
@@ -602,7 +602,7 @@
 											"top": 633,
 											"width": 352.50146484375,
 											"height": 13,
-											"text": "-instancia: Celular",
+											"text": "-instancia: Gestor",
 											"horizontalAlignment": 0
 										}
 									],
@@ -854,7 +854,7 @@
 											"top": 836,
 											"width": 352.50146484375,
 											"height": 13,
-											"text": "+getInstancia(): Celular",
+											"text": "+getInstancia(): Gestor",
 											"horizontalAlignment": 0
 										}
 									],
@@ -6231,7 +6231,7 @@
 					"_parent": {
 						"$ref": "AAAAAAFF+qBWK6M3Z8Y="
 					},
-					"name": "Celular",
+					"name": "Gestor",
 					"ownedElements": [
 						{
 							"_type": "UMLAssociation",
@@ -6410,7 +6410,8 @@
 									"_parent": {
 										"$ref": "AAAAAAGU/GJtb2DDWqE="
 									},
-									"name": "gruposAmigos"
+									"name": "gruposAmigos",
+									"type": ""
 								},
 								{
 									"_type": "UMLParameter",
@@ -7959,7 +7960,8 @@
 									"_parent": {
 										"$ref": "AAAAAAGU/GRWjoLk9iQ="
 									},
-									"name": "int participantes"
+									"name": "int participantes",
+									"type": ""
 								},
 								{
 									"_type": "UMLParameter",
