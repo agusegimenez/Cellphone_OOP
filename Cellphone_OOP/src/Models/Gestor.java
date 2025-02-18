@@ -18,9 +18,15 @@ public class Gestor {
     private Gestor(){
         this.llamadas = new ArrayList<>();
         this.reuniones = new ArrayList<>();
-        this.contactos = new ArrayList<>();
+        try {
+            this.contactos = ContactoRepository.cargarContactos();
+        } catch (Exception e) {
+            System.err.println("⚠️ No se pudieron cargar los contactos: " + e.getMessage());
+            this.contactos = new ArrayList<>(); // Si falla, al menos que no sea null
+        }
         this.gruposAmigos = new ArrayList<>();
-    };
+    }
+
 
     //singleton, se hace el llamado a la instancia de Gestor, de no existir, la crea
     public static Gestor getInstance(){
@@ -153,6 +159,7 @@ public class Gestor {
         }
 
         contactos.add(nuevoContacto);
+        ContactoRepository.guardarContactos(contactos);
         System.out.println("✅ Contacto agregado con éxito: " + nuevoContacto.getNombreContacto() + ", Telefono: " + nuevoContacto.getNumeroContacto());
     }
 
@@ -163,5 +170,6 @@ public class Gestor {
             System.out.println("");
         }
     }
+
 
 }

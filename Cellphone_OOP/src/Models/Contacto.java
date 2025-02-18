@@ -18,12 +18,12 @@ public abstract class Contacto {
         this.nombreContacto = nombreContacto;
     }
 
-    public int getNumeroContacto(){
+    public int getNumeroContacto() {
         return numeroContacto;
     }
 
     public Contacto(String nombreContacto, int numeroContacto) {
-        this.idContacto = idContacto++;
+        this.idContacto = contadorId++;
         this.nombreContacto = nombreContacto;
         this.numeroContacto = numeroContacto;
     }
@@ -31,3 +31,4 @@ public abstract class Contacto {
     @Override
     public abstract String toString();
 }
+
