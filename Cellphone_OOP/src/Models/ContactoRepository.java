@@ -1,6 +1,11 @@
 package Models;
 
 import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
+
+import java.io.*;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ContactoRepository {
@@ -12,14 +17,14 @@ public class ContactoRepository {
             for (Contacto contacto : contactos) {
                 if (contacto instanceof Familiar) {
                     Familiar familiar = (Familiar) contacto;
-                    writer.write("Familiar;" + familiar.getIdContacto() + ";" +
+                    writer.write("Familiar;" +
                             familiar.getNombreContacto() + ";" +
                             familiar.getNumeroContacto() + ";" +
                             familiar.getTipoRelacion());
                 } else if (contacto instanceof Amigo) {
                     Amigo amigo = (Amigo) contacto;
                     String grupoNombre = (amigo.getGrupo() != null) ? amigo.getGrupo().getNombreGrupo() : "Sin grupo";
-                    writer.write("Amigo;" + amigo.getIdContacto() + ";" +
+                    writer.write("Amigo;" +
                             amigo.getNombreContacto() + ";" +
                             amigo.getNumeroContacto() + ";" +
                             amigo.getApodo() + ";" + grupoNombre);
@@ -31,34 +36,34 @@ public class ContactoRepository {
         }
     }
 
-    public static void imprimirContactos(List<Contacto> contactos) {
-        System.out.println("\n📒 Lista de Contactos:");
+    public static List<Contacto> cargarContactos() {
+        List<Contacto> contactos = new ArrayList<>();
+        try (BufferedReader reader = new BufferedReader(new FileReader(FILE_NAME))) {
+            String linea;
+            while ((linea = reader.readLine()) != null) {
+                String[] datos = linea.split(";");
+                if (datos.length > 0) {
+                    String tipo = datos[0];
+                    String nombre = datos[1];
+                    int numero = Integer.parseInt(datos[2]);
 
-        System.out.println("\n- Familiares:");
-        for (Contacto contacto : contactos) {
-            if (contacto instanceof Familiar) {
-                Familiar familiar = (Familiar) contacto;
-                System.out.println("  - IdContacto: " + familiar.getIdContacto());
-                System.out.println("  - Nombre: " + familiar.getNombreContacto());
-                System.out.println("  - Número: " + familiar.getNumeroContacto());
-                System.out.println("  - Tipo de Relación: " + familiar.getTipoRelacion());
-                System.out.println();
+                    if ("Familiar".equals(tipo) && datos.length == 4) {
+                        String tipoRelacion = datos[3];
+                        contactos.add(new Familiar(nombre, numero, tipoRelacion));
+                    } else if ("Amigo".equals(tipo) && datos.length == 5) {
+                        String apodo = datos[3];
+                        String nombreGrupo = datos[4];
+                        GrupoAmigos grupo = nombreGrupo.equals("Sin grupo") ? null : new GrupoAmigos(nombreGrupo, new ArrayList<>());
+                        contactos.add(new Amigo(nombre, numero, apodo, grupo));
+                    }
+                }
             }
+            System.out.println("✅ Contactos cargados correctamente desde el archivo.");
+        } catch (IOException e) {
+            System.err.println("⚠️ No se pudo leer el archivo de contactos: " + e.getMessage());
         }
-
-        System.out.println("\n- Amigos:");
-        for (Contacto contacto : contactos) {
-            if (contacto instanceof Amigo) {
-                Amigo amigo = (Amigo) contacto;
-                String grupoNombre = (amigo.getGrupo() != null) ? amigo.getGrupo().getNombreGrupo() : "Sin grupo";
-                System.out.println("  - IdContacto: " + amigo.getIdContacto());
-                System.out.println("  - Nombre: " + amigo.getNombreContacto());
-                System.out.println("  - Número: " + amigo.getNumeroContacto());
-                System.out.println("  - Apodo: " + amigo.getApodo());
-                System.out.println("  - Grupo: " + grupoNombre);
-                System.out.println();
-            }
-        }
+        return contactos;
     }
 }
+
 
