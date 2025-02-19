@@ -42,31 +42,11 @@ public class Gestor {
         System.out.println("1. Familiar");
         System.out.println("2. Amigo");
 
-        int opcion = 0;
-        boolean opcionValida = false;
-
-        while (!opcionValida) {
-            try {
-                System.out.print("Ingrese una opción: ");
-                opcion = input.nextInt();
-                input.nextLine(); // Consumir el salto de línea
-
-                if (opcion == 1 || opcion == 2) {
-                    opcionValida = true;
-                } else {
-                    System.out.println("⚠️ Opción no válida. Intente nuevamente.");
-                }
-            } catch (InputMismatchException e) {
-                System.out.println("❌ Entrada inválida. Por favor, ingrese un número válido.");
-                input.nextLine(); // Limpiar buffer
-            }
-        }
-
+        int opcion = obtenerOpcion(1, 2);
         System.out.print("Ingrese el nombre del contacto: ");
         String nombre = input.nextLine();
-        System.out.println("Ingrese el numero del contacto: ");
-        int numeroContacto = input.nextInt();
-        input.nextLine();
+
+        int numeroContacto = obtenerNumeroContacto();
 
         Contacto nuevoContacto;
 
@@ -75,100 +55,149 @@ public class Gestor {
             String tipoRelacion = input.nextLine();
             nuevoContacto = new Familiar(nombre, numeroContacto, tipoRelacion);
         } else { // Crear Amigo
-            System.out.print("Ingrese el apodo del amigo: ");
-            String apodo = input.nextLine();
-
-            GrupoAmigos grupoSeleccionado = null;
-
-            if (gruposAmigos.size()==0) {
-                System.out.println("¿Desea agregarlo a un grupo existente?");
-                System.out.println("1. Sí");
-                System.out.println("2. No, crear un nuevo grupo");
-                System.out.println("3. No agregar a ningún grupo");
-
-                int opcionGrupo = 0;
-                boolean opcionGrupoValida = false;
-
-                while (!opcionGrupoValida) {
-                    try {
-                        System.out.print("Ingrese una opción: ");
-                        opcionGrupo = input.nextInt();
-                        input.nextLine(); // Consumir el salto de línea
-
-                        if (opcionGrupo >= 1 && opcionGrupo <= 3) {
-                            opcionGrupoValida = true;
-                        } else {
-                            System.out.println("⚠️ Opción no válida. Intente nuevamente.");
-                        }
-                    } catch (InputMismatchException e) {
-                        System.out.println("❌ Entrada inválida. Por favor, ingrese un número válido.");
-                        input.nextLine(); // Limpiar buffer
-                    }
-                }
-
-                if (opcionGrupo == 1) { // Agregar a un grupo existente
-                    if(gruposAmigos.size()==0){
-                        System.out.println("No tiene grupos agregados. Va a crear uno nuevo.");
-                        System.out.print("Ingrese el nombre del nuevo grupo: ");
-                        String nombreGrupo = input.nextLine();
-                        grupoSeleccionado = new GrupoAmigos(nombreGrupo, new ArrayList<>());
-                        gruposAmigos.add(grupoSeleccionado);
-                    } else{
-                        System.out.println("Seleccione un grupo:");
-
-                        for (int i = 0; i < gruposAmigos.size(); i++) {
-                            System.out.println((i + 1) + ". " + gruposAmigos.get(i).getNombreGrupo());
-                        }
-
-                        int grupoIndex = -1;
-                        boolean grupoValido = false;
-
-                        while (!grupoValido) {
-                            try {
-                                System.out.print("Ingrese el número del grupo: ");
-                                grupoIndex = input.nextInt() - 1;
-                                input.nextLine(); // Consumir el salto de línea
-
-                                if (grupoIndex >= 0 && grupoIndex < gruposAmigos.size()) {
-                                    grupoSeleccionado = gruposAmigos.get(grupoIndex);
-                                    grupoValido = true;
-                                } else {
-                                    System.out.println("⚠️ Número de grupo inválido. Intente nuevamente.");
-                                }
-                            } catch (InputMismatchException e) {
-                                System.out.println("❌ Entrada inválida. Por favor, ingrese un número válido.");
-                                input.nextLine(); // Limpiar buffer
-                            }
-                        }
-                    }
-
-                } else if (opcionGrupo == 2) { // Crear un nuevo grupo
-                    System.out.print("Ingrese el nombre del nuevo grupo: ");
-                    String nombreGrupo = input.nextLine();
-                    grupoSeleccionado = new GrupoAmigos(nombreGrupo, new ArrayList<>());
-                    gruposAmigos.add(grupoSeleccionado);
-                }
-            }
-
-            nuevoContacto = new Amigo(nombre, numeroContacto, apodo, grupoSeleccionado);
-
-            if (grupoSeleccionado != null) {
-                grupoSeleccionado.getMiembros().add((Amigo) nuevoContacto);
-                System.out.println("✅ Amigo agregado al grupo: " + grupoSeleccionado.getNombreGrupo());
-            }
+            nuevoContacto = crearAmigo(nombre, numeroContacto);
         }
 
         contactos.add(nuevoContacto);
         ContactoRepository.guardarContactos(contactos);
-        System.out.println("✅ Contacto agregado con éxito: " + nuevoContacto.getNombreContacto() + ", Telefono: " + nuevoContacto.getNumeroContacto());
+        System.out.println("✅ Contacto agregado con éxito: " + nuevoContacto.getNombreContacto() + ", Teléfono: " + nuevoContacto.getNumeroContacto());
     }
 
+
+     // metodo para obtener una opcion valida dentro de un rango
+    private int obtenerOpcion(int min, int max) {
+        int opcion = 0;
+        while (true) {
+            try {
+                System.out.print("Ingrese una opción: ");
+                opcion = input.nextInt();
+                input.nextLine(); // Consumir salto de línea
+                if (opcion >= min && opcion <= max) {
+                    return opcion;
+                }
+                System.out.println("⚠️ Opción no válida. Intente nuevamente.");
+            } catch (InputMismatchException e) {
+                System.out.println("❌ Entrada inválida. Por favor, ingrese un número válido.");
+                input.nextLine();
+            }
+        }
+    }
+
+
+    // metodo para obtener un numero de contacto valido
+    private int obtenerNumeroContacto() {
+        int numero = 0;
+        while (true) {
+            try {
+                System.out.print("Número: ");
+                numero = input.nextInt();
+                input.nextLine();
+                if (numero > 0) {
+                    return numero;
+                }
+                System.out.println("⚠️ El número debe ser positivo.");
+            } catch (InputMismatchException e) {
+                System.out.println("❌ Entrada inválida. Ingrese un número válido.");
+                input.nextLine();
+            }
+        }
+    }
+
+
+    //metodo para crear un amigo y agregarlo a un grupo de amigos si el usuario lo desea
+    private Amigo crearAmigo(String nombre, int numeroContacto) {
+        System.out.print("Ingrese el apodo del amigo: ");
+        String apodo = input.nextLine();
+
+        GrupoAmigos grupoSeleccionado = null;
+
+        System.out.println("¿Desea agregarlo a un grupo?");
+        System.out.println("1. Sí, agregar a un grupo existente");
+        System.out.println("2. No, crear un nuevo grupo");
+        System.out.println("3. No agregar a ningún grupo");
+
+        int opcionGrupo = obtenerOpcion(1, 3);
+
+        if (opcionGrupo == 1) { // Agregar a grupo existente
+            if (gruposAmigos.isEmpty()) {
+                System.out.println("No tiene grupos agregados. Debe crear uno nuevo.");
+                grupoSeleccionado = crearNuevoGrupo();
+            } else {
+                grupoSeleccionado = seleccionarGrupoExistente();
+            }
+        } else if (opcionGrupo == 2) { // Crear un nuevo grupo
+            grupoSeleccionado = crearNuevoGrupo();
+        }
+
+        Amigo nuevoAmigo = new Amigo(nombre, numeroContacto, apodo, grupoSeleccionado);
+
+        if (grupoSeleccionado != null) {
+            grupoSeleccionado.getMiembros().add(nuevoAmigo);
+            System.out.println("✅ Amigo agregado al grupo: " + grupoSeleccionado.getNombreGrupo());
+        }
+
+        return nuevoAmigo;
+    }
+
+    //metodo para agregar un grupo de amigos
+    private GrupoAmigos crearNuevoGrupo() {
+        System.out.print("Ingrese el nombre del nuevo grupo: ");
+        String nombreGrupo = input.nextLine();
+        GrupoAmigos nuevoGrupo = new GrupoAmigos(nombreGrupo, new ArrayList<>());
+        gruposAmigos.add(nuevoGrupo);
+        return nuevoGrupo;
+    }
+
+
+    //metodo para seleccionar un grupo existente
+    private GrupoAmigos seleccionarGrupoExistente() {
+        System.out.println("Seleccione un grupo:");
+        for (int i = 0; i < gruposAmigos.size(); i++) {
+            System.out.println((i + 1) + ". " + gruposAmigos.get(i).getNombreGrupo());
+        }
+
+        int grupoIndex = obtenerOpcion(1, gruposAmigos.size()) - 1;
+        return gruposAmigos.get(grupoIndex);
+    }
+
+
+    //metodo para mostrar los contactos
     public void mostrarContactos(){
         for(Contacto contacto : contactos){
             String info = contacto.toString();
             System.out.println(info);
             System.out.println("");
         }
+    }
+
+    //metodo para buscar un contacto
+    public Contacto buscarContacto(int idContacto) {
+        for (Contacto contacto : contactos) {
+            if (idContacto == contacto.getIdContacto()) {
+                System.out.println("✅ Contacto encontrado!");
+                return contacto;
+            }
+        }
+        System.out.println("⚠️ El contacto no fue encontrado.");
+        return null;
+    }
+
+    //metodo para eliminar un contacto
+    public void eliminarContacto(int idContacto){
+        boolean eliminado = contactos.removeIf(contacto -> contacto.getIdContacto() == idContacto);
+        if (eliminado) {
+            System.out.println("✅ El contacto ha sido removido exitosamente!");
+        } else {
+            System.out.println("⚠️ El contacto no fue encontrado.");
+        }
+    }
+
+    public void crearDuenio(){
+        System.out.println("Bienvenido/a! Para hacer uso del celular por primera vez tiene que registrarse.");
+        System.out.println("Ingrese su nombre: ");
+        String nombreUsuario = input.next();
+        int numero = obtenerNumeroContacto();
+        Usuario duenio = new Usuario(getInstance(), nombreUsuario, numero);
     }
 
 
