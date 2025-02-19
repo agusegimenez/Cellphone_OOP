@@ -79,4 +79,6 @@ public abstract class Evento {
     public void setOcurrio(boolean ocurrio) {
         this.ocurrio = ocurrio;
     }
+
+    public abstract String toString();
 }

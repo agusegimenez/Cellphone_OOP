@@ -171,5 +171,20 @@ public class Gestor {
         }
     }
 
+    public void mostrarReuniones(){
+        for(Reunion reunion : reuniones){
+            String info = reunion.toString();
+            System.out.println(info);
+            System.out.println("");
+        }
+    }
+
+    public void mostrarLlamadas(){
+        for(Llamada llamada : llamadas){
+            String info = llamada.toString();
+            System.out.println(info);
+            System.out.println("");
+        }
+    }
 
 }

@@ -10,6 +10,17 @@ public class Llamada extends Evento{
         super(idEvento, fecha, duracion, cantidadParticipantes, motivo);
     }
 
+    //Metodo sobreescrito para presentar atributos
+    @Override
+    public String toString() {
+        return "ID del evento: " + this.getIdEvento() + "\n" +
+                "Fecha: " + this.getFecha() + "\n" +
+                "Duracion: " + this.getDuracion() + "\n" +
+                "Cantidad de participantes: " + this.getCantidadParticipantes() + "\n" +
+                "Motivo: " + this.getMotivo() + "\n" +
+                "Videollamada: " + this.esVideollamada;
+    }
+
     //getters y setters de los atributos de la clase Llamada
     public boolean isEsVideollamada() {
         return esVideollamada;

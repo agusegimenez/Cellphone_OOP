@@ -6,5 +6,7 @@ public class Main {
         gestor.agendarContacto();
         gestor.agendarContacto();
         gestor.mostrarContactos();
+        gestor.mostrarReuniones();
+        gestor.mostrarLlamadas();
     }
 }

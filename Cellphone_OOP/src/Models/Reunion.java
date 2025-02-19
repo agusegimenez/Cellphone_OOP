@@ -11,6 +11,17 @@ public class Reunion extends Evento{
         gestionarSala(); // Asigna el tipo de sala al crear la reunión
     }
 
+    //Metodo sobreescrito para presentar atributos
+    @Override
+    public String toString() {
+        return "ID del evento: " + this.getIdEvento() + "\n" +
+                "Fecha: " + this.getFecha() + "\n" +
+                "Duracion: " + this.getDuracion() + "\n" +
+                "Cantidad de participantes: " + this.getCantidadParticipantes() + "\n" +
+                "Motivo: " + this.getMotivo() + "\n" +
+                "Sala: " + this.getSala();
+    }
+
     // Metodo para asignar sala segun cantidad de participantes
     public void gestionarSala() {
         if (getCantidadParticipantes() <=5) {
