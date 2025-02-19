@@ -170,6 +170,7 @@ public class Gestor {
         }
     }
 
+
     //metodo para buscar un contacto
     private Contacto buscarContacto(int idContacto) {
         for (Contacto contacto : contactos) {
@@ -202,5 +203,21 @@ public class Gestor {
         return usuario;
     }
 
+
+    public void mostrarReuniones(){
+        for(Reunion reunion : reuniones){
+            String info = reunion.toString();
+            System.out.println(info);
+            System.out.println("");
+        }
+    }
+
+    public void mostrarLlamadas(){
+        for(Llamada llamada : llamadas){
+            String info = llamada.toString();
+            System.out.println(info);
+            System.out.println("");
+        }
+    }
 
 }
