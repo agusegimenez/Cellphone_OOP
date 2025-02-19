@@ -6,8 +6,8 @@ public class Reunion extends Evento{
     private TipoSala sala;
 
     //Constructor de la clase Reunion
-    public Reunion(int idEvento, Date fecha, int duracion, int cantidadParticipantes, String motivo) {
-        super(idEvento, fecha, duracion, cantidadParticipantes, motivo);
+    public Reunion(Date fecha, int duracion, int cantidadParticipantes, String motivo) {
+        super(fecha, duracion, cantidadParticipantes, motivo);
         gestionarSala(); // Asigna el tipo de sala al crear la reunión
     }
 

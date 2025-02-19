@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 
 public abstract class Evento {
+    private static int contadorEvento = 1;
     private int idEvento;
     private Date fecha;
     private List<Contacto> participantes;
@@ -14,8 +15,8 @@ public abstract class Evento {
     private boolean ocurrio=false;
 
     //Constructor de la clase Evento
-    public Evento(int idEvento, Date fecha, int duracion, int cantidadParticipantes, String motivo) {
-        this.idEvento = idEvento;
+    public Evento(Date fecha, int duracion, int cantidadParticipantes, String motivo) {
+        this.idEvento = contadorEvento++;
         this.fecha = fecha;
         this.participantes = new ArrayList<>();
         this.duracion = duracion;

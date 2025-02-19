@@ -6,8 +6,8 @@ public class Llamada extends Evento{
     private boolean esVideollamada = false;
 
     //Constructor de la clase Llamada
-    public Llamada(int idEvento, Date fecha, int duracion, int cantidadParticipantes, String motivo) {
-        super(idEvento, fecha, duracion, cantidadParticipantes, motivo);
+    public Llamada(Date fecha, int duracion, int cantidadParticipantes, String motivo) {
+        super(fecha, duracion, cantidadParticipantes, motivo);
     }
 
     //Metodo sobreescrito para presentar atributos

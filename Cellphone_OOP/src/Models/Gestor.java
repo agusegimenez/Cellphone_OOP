@@ -4,6 +4,10 @@ import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 
 public class Gestor {
     private static Gestor instance;
@@ -11,6 +15,7 @@ public class Gestor {
     public List<Reunion> reuniones;
     public List<Contacto> contactos;
     public List<GrupoAmigos> gruposAmigos;
+    public List<Evento> eventos;
     public Usuario duenio;
     public Scanner input;
 
@@ -25,6 +30,7 @@ public class Gestor {
             this.contactos = new ArrayList<>(); // Si falla, al menos que no sea null
         }
         this.gruposAmigos = new ArrayList<>();
+        this.eventos = new ArrayList<>();
     }
 
 
@@ -63,6 +69,52 @@ public class Gestor {
         System.out.println("✅ Contacto agregado con éxito: " + nuevoContacto.getNombreContacto() + ", Teléfono: " + nuevoContacto.getNumeroContacto());
     }
 
+    public void registrarEvento() {
+        System.out.println("📅 Va a registrar un evento. A continuación, elija una opción:");
+        System.out.println("1. Reunión");
+        System.out.println("2. Llamada");
+
+        int opcion = obtenerOpcion(1, 2);
+
+        System.out.print("Ingrese la fecha del evento (Formato: dd/MM/yyyy HH:mm): ");
+        Date fecha = obtenerFecha();
+
+        System.out.print("Ingrese la duración en minutos: ");
+        int duracion = obtenerNumero();
+
+        System.out.print("Ingrese la cantidad de participantes: ");
+        int cantidadParticipantes = obtenerNumero();
+
+        System.out.print("Ingrese el motivo del evento: ");
+        String motivo = input.nextLine();
+
+        Evento nuevoEvento;
+
+        if (opcion == 1) { // Registrar Reunión
+            nuevoEvento = new Reunion(fecha, duracion, cantidadParticipantes, motivo);
+        } else { // Registrar Llamada
+            System.out.print("¿Es una videollamada? (Sí = 1 / No = 2): ");
+            boolean esVideollamada = (obtenerOpcion(1, 2) == 1);
+            Llamada nuevaLlamada = new Llamada(fecha, duracion, cantidadParticipantes, motivo);
+            nuevaLlamada.setEsVideollamada(esVideollamada);
+            nuevoEvento = nuevaLlamada;
+        }
+
+        eventos.add(nuevoEvento);
+        System.out.println("✅ Evento registrado con éxito:\n" + nuevoEvento.getClass().getName());
+    }
+
+    private Date obtenerFecha() {
+        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+        while (true) {
+            try {
+                String inputFecha = input.nextLine();
+                return formato.parse(inputFecha);
+            } catch (ParseException e) {
+                System.out.println("❌ Formato incorrecto. Intente nuevamente (dd/MM/yyyy HH:mm): ");
+            }
+        }
+    }
 
      // metodo para obtener una opcion valida dentro de un rango
     private int obtenerOpcion(int min, int max) {
@@ -193,6 +245,17 @@ public class Gestor {
         }
     }
 
+    private void eliminarEvento(int idEvento) {
+        boolean eliminadoEvento = eventos.removeIf(evento -> evento.getIdEvento() == idEvento);
+
+        if (eliminadoEvento) {
+            System.out.println("✅ El evento ha sido eliminado exitosamente!");
+        } else {
+            System.out.println("⚠️ El evento no fue encontrado.");
+        }
+    }
+
+
     private Usuario crearDuenio(){
         System.out.println("Bienvenido/a! Para hacer uso del celular por primera vez tiene que registrarse.");
         System.out.println("Ingrese su nombre: ");
@@ -203,6 +266,13 @@ public class Gestor {
         return usuario;
     }
 
+    private void mostrarEventos(){
+        for(Evento evento : eventos){
+            String info = evento.toString();
+            System.out.println(info);
+            System.out.println("");
+        }
+    }
 
     public void mostrarReuniones(){
         for(Reunion reunion : reuniones){
@@ -245,15 +315,14 @@ public class Gestor {
                     agendarContacto();
                     break;
                 case 2:
-                    System.out.println("Funcionalidad en desarrollo: Agendar un evento");
+                    registrarEvento();
                     break;
                 case 3:
                     mostrarContactos();
                     break;
                 case 4:
                     System.out.println("\n📅 Eventos agendados:");
-                    mostrarLlamadas();
-                    mostrarReuniones();
+                    mostrarEventos();
                     break;
                 case 5:
                     System.out.print("Ingrese el ID del contacto a eliminar: ");
@@ -261,7 +330,9 @@ public class Gestor {
                     eliminarContacto(idContacto);
                     break;
                 case 6:
-                    System.out.println("Funcionalidad en desarrollo: Eliminar un evento");
+                    System.out.print("Ingrese el ID del evento a eliminar: ");
+                    int idEvento = input.nextInt();
+                    eliminarEvento(idEvento);
                     break;
                 case 7:
                     System.out.println("👋 Saliendo del gestor. ¡Hasta la próxima!");
