@@ -220,4 +220,55 @@ public class Gestor {
         }
     }
 
+    public void orquestador() {
+        input = new Scanner(System.in);
+
+        // Registrar usuario al inicio
+        this.duenio = crearDuenio();
+        System.out.println("✅ Registro exitoso. Bienvenido/a, " + duenio.getNombre() + "!");
+
+        boolean continuar = true;
+        while (continuar) {
+            System.out.println("\n📱 Menú Principal:");
+            System.out.println("1. Agendar un contacto");
+            System.out.println("2. Agendar un evento");
+            System.out.println("3. Mostrar contactos");
+            System.out.println("4. Mostrar eventos");
+            System.out.println("5. Eliminar un contacto");
+            System.out.println("6. Eliminar un evento");
+            System.out.println("7. Salir");
+
+            int opcion = obtenerOpcion(1, 7);
+
+            switch (opcion) {
+                case 1:
+                    agendarContacto();
+                    break;
+                case 2:
+                    System.out.println("Funcionalidad en desarrollo: Agendar un evento");
+                    break;
+                case 3:
+                    mostrarContactos();
+                    break;
+                case 4:
+                    System.out.println("\n📅 Eventos agendados:");
+                    mostrarLlamadas();
+                    mostrarReuniones();
+                    break;
+                case 5:
+                    System.out.print("Ingrese el ID del contacto a eliminar: ");
+                    int idContacto = input.nextInt();
+                    eliminarContacto(idContacto);
+                    break;
+                case 6:
+                    System.out.println("Funcionalidad en desarrollo: Eliminar un evento");
+                    break;
+                case 7:
+                    System.out.println("👋 Saliendo del gestor. ¡Hasta la próxima!");
+                    continuar = false;
+                    break;
+            }
+        }
+    }
+
 }
