@@ -36,7 +36,7 @@ public class Gestor {
         return instance;
     }
 
-    public void agendarContacto() {
+    private void agendarContacto() {
         input = new Scanner(System.in);
         System.out.println("Va a agendar un contacto. A continuación, elija una opción:");
         System.out.println("1. Familiar");
@@ -162,7 +162,7 @@ public class Gestor {
 
 
     //metodo para mostrar los contactos
-    public void mostrarContactos(){
+    private void mostrarContactos(){
         for(Contacto contacto : contactos){
             String info = contacto.toString();
             System.out.println(info);
@@ -171,7 +171,7 @@ public class Gestor {
     }
 
     //metodo para buscar un contacto
-    public Contacto buscarContacto(int idContacto) {
+    private Contacto buscarContacto(int idContacto) {
         for (Contacto contacto : contactos) {
             if (idContacto == contacto.getIdContacto()) {
                 System.out.println("✅ Contacto encontrado!");
@@ -183,7 +183,7 @@ public class Gestor {
     }
 
     //metodo para eliminar un contacto
-    public void eliminarContacto(int idContacto){
+    private void eliminarContacto(int idContacto){
         boolean eliminado = contactos.removeIf(contacto -> contacto.getIdContacto() == idContacto);
         if (eliminado) {
             System.out.println("✅ El contacto ha sido removido exitosamente!");
@@ -192,12 +192,14 @@ public class Gestor {
         }
     }
 
-    public void crearDuenio(){
+    private Usuario crearDuenio(){
         System.out.println("Bienvenido/a! Para hacer uso del celular por primera vez tiene que registrarse.");
         System.out.println("Ingrese su nombre: ");
         String nombreUsuario = input.next();
         int numero = obtenerNumeroContacto();
-        Usuario duenio = new Usuario(getInstance(), nombreUsuario, numero);
+        Usuario usuario = new Usuario(getInstance(), nombreUsuario, numero);
+
+        return usuario;
     }
 
 
