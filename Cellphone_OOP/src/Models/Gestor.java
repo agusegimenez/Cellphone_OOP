@@ -46,7 +46,7 @@ public class Gestor {
         System.out.print("Ingrese el nombre del contacto: ");
         String nombre = input.nextLine();
 
-        int numeroContacto = obtenerNumeroContacto();
+        int numeroContacto = obtenerNumero();
 
         Contacto nuevoContacto;
 
@@ -85,7 +85,7 @@ public class Gestor {
 
 
     // metodo para obtener un numero de contacto valido
-    private int obtenerNumeroContacto() {
+    private int obtenerNumero() {
         int numero = 0;
         while (true) {
             try {
@@ -196,7 +196,7 @@ public class Gestor {
         System.out.println("Bienvenido/a! Para hacer uso del celular por primera vez tiene que registrarse.");
         System.out.println("Ingrese su nombre: ");
         String nombreUsuario = input.next();
-        int numero = obtenerNumeroContacto();
+        int numero = obtenerNumero();
         Usuario usuario = new Usuario(getInstance(), nombreUsuario, numero);
 
         return usuario;
