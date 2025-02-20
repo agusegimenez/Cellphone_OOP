@@ -101,7 +101,7 @@ public class Gestor {
         }
 
         eventos.add(nuevoEvento);
-        System.out.println("✅ Evento registrado con éxito:\n" + nuevoEvento.getClass().getName());
+        System.out.println("✅ Evento registrado con éxito:\n" + nuevoEvento.getClass().getSimpleName());
     }
 
     private Date obtenerFecha() {
