@@ -1,0 +1,4 @@
+Familiar;Abel;21423423;Padre
+Amigo;Gero;32142321;Gerito;Sin grupo
+Amigo;Pehuen;24566656;Pitu;Mejores
+Amigo;Gonza;35344332;Gonzalito;Sin grupo

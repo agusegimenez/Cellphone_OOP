@@ -32,6 +32,8 @@ public class Amigo extends Contacto {
                 "Nombre: " + this.getNombreContacto() + "\n" +
                 "Numero: " + this.getNumeroContacto() + "\n" +
                 "Apodo: " + this.getApodo() + "\n" +
-                "Pertenece al grupo de Amigos: " + this.getGrupo().getNombreGrupo();
+                "Pertenece al grupo de Amigos: " +
+                (this.getGrupo() != null ? this.getGrupo().getNombreGrupo() : "no pertenece a ningún grupo todavía");
     }
+
 }
