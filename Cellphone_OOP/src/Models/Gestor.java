@@ -141,7 +141,6 @@ public class Gestor {
         int numero = 0;
         while (true) {
             try {
-                System.out.print("Número: ");
                 numero = input.nextInt();
                 input.nextLine();
                 if (numero > 0) {
@@ -260,6 +259,7 @@ public class Gestor {
         System.out.println("Bienvenido/a! Para hacer uso del celular por primera vez tiene que registrarse.");
         System.out.println("Ingrese su nombre: ");
         String nombreUsuario = input.next();
+        System.out.print("Número: ");
         int numero = obtenerNumero();
         Usuario usuario = new Usuario(getInstance(), nombreUsuario, numero);
 
