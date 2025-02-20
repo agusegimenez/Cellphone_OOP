@@ -123,7 +123,7 @@ public class Gestor {
             try {
                 System.out.print("Ingrese una opción: ");
                 opcion = input.nextInt();
-                input.nextLine(); // Consumir salto de línea
+                input.nextLine();
                 if (opcion >= min && opcion <= max) {
                     return opcion;
                 }
@@ -274,21 +274,21 @@ public class Gestor {
         }
     }
 
-    public void mostrarReuniones(){
-        for(Reunion reunion : reuniones){
-            String info = reunion.toString();
-            System.out.println(info);
-            System.out.println("");
-        }
-    }
-
-    public void mostrarLlamadas(){
-        for(Llamada llamada : llamadas){
-            String info = llamada.toString();
-            System.out.println(info);
-            System.out.println("");
-        }
-    }
+//    public void mostrarReuniones(){
+//        for(Reunion reunion : reuniones){
+//            String info = reunion.toString();
+//            System.out.println(info);
+//            System.out.println("");
+//        }
+//    }
+//
+//    public void mostrarLlamadas(){
+//        for(Llamada llamada : llamadas){
+//            String info = llamada.toString();
+//            System.out.println(info);
+//            System.out.println("");
+//        }
+//    }
 
     public void orquestador() {
         input = new Scanner(System.in);
