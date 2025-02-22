@@ -11,9 +11,10 @@ _In order to comply with and enforce encapsulation, all "Gestor" methods are pri
 
 _Using polymorphism and inheritance, we made some abstract methods on the Parent classes so the child ones were obligated to overwrite them._
 
-_We also made a ContactRepository class that contains two methods:
-    1. saveContacts: it saves the List of Contacts in a .txt file
-    2. loadContacts: it loads the previous List of Contacts from the .txt file so the user doesn't lose data._
+_We also made a ContactRepository class that contains two methods:_
+
+_- 1. saveContacts: it saves the List of Contacts in a .txt file_
+_- 2. loadContacts: it loads the previous List of Contacts from the .txt file so the user doesn't lose data._
     
 _Since we hadn't seen Swing we were not required to use UI but we made a Menu so the user can interact with the app through the terminal._
 
